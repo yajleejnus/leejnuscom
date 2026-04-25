@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Hmong Language Lessons — HmongHeritage</title>
+  <meta name="description" content="Learn Hmong language with structured lessons covering greetings, numbers, family terms, grammar, and everyday conversation.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="index.html" class="active">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" style="padding: 80px 24px;">
+    <div class="hero-content">
+      <div class="hmong-title">Ceev Hmoob</div>
+      <h1>Hmong <span>Language</span> Lessons</h1>
+      <p>Structured lessons to help you learn Hmong — from basic phrases to everyday conversation. Includes both Hmong Njua (Green) and Hmong Daw (White) dialects.</p>
+    </div>
+  </section>
+
+  <div class="hmong-border-thick"></div>
+
+  <!-- Lesson Navigation -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="lesson-tabs">
+        <button class="lesson-tab active" data-tab="greetings">👋 Greetings</button>
+        <button class="lesson-tab" data-tab="numbers">🔢 Numbers</button>
+        <button class="lesson-tab" data-tab="family">👨‍👩‍👧‍👦 Family</button>
+        <button class="lesson-tab" data-tab="food">🍚 Food</button>
+        <button class="lesson-tab" data-tab="grammar">📝 Grammar</button>
+        <button class="lesson-tab" data-tab="conversation">💬 Conversation</button>
+      </div>
+
+      <!-- Greetings -->
+      <div class="lesson-content active" id="tab-greetings">
+        <div class="section-header">
+          <h2>👋 Greetings & Basics</h2>
+          <p>Essential phrases for everyday interaction.</p>
+        </div>
+        <table class="lesson-table">
+          <thead><tr><th>Hmong</th><th>Pronunciation</th><th>English</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td class="hmong-word">Nyob zoo</td><td class="pronunciation">[nyob zow]</td><td>Hello / Greetings</td><td>Universal greeting, works any time</td></tr>
+            <tr><td class="hmong-word">Nyob qab</td><td class="pronunciation">[nyob kub]</td><td>Goodbye</td><td>When leaving</td></tr>
+            <tr><td class="hmong-word">Ua tsaug</td><td class="pronunciation">[ow tsowg]</td><td>Thank you</td><td>Expressing gratitude</td></tr>
+            <tr><td class="hmong-word">Ua tsaug ntau</td><td class="pronunciation">[ow tsowg ntau]</td><td>Thank you very much</td><td>Emphasized gratitude</td></tr>
+            <tr><td class="hmong-word">Yog</td><td class="pronunciation">[yong]</td><td>Yes</td><td>Agreement</td></tr>
+            <tr><td class="hmong-word">Tsis yog</td><td class="pronunciation">[tis yong]</td><td>No</td><td>Disagreement</td></tr>
+            <tr><td class="hmong-word">Txhob ua neej</td><td class="pronunciation">[tshob ow neej]</td><td>Excuse me / Sorry</td><td>Apologizing or getting attention</td></tr>
+            <tr><td class="hmong-word">Koj lub npe li</td><td class="pronunciation">[kow loob nee pee lee]</td><td>What is your name?</td><td>Asking someone's name</td></tr>
+            <tr><td class="hmong-word">Kuv lub npe yog...</td><td class="pronunciation">[koo loob nee yong]</td><td>My name is...</td><td>Introducing yourself</td></tr>
+            <tr><td class="hmong-word">Nyob li cas</td><td class="pronunciation">[nyob lee kas]</td><td>How are you?</td><td>Asking about wellbeing</td></tr>
+            <tr><td class="hmong-word">Nyob zoo</td><td class="pronunciation">[nyob zow]</td><td>I'm fine / Good</td><td>Response to "how are you"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Numbers -->
+      <div class="lesson-content" id="tab-numbers">
+        <div class="section-header">
+          <h2>🔢 Numbers (1–20)</h2>
+          <p>Learn to count in Hmong. Tone marks matter — they change meaning!</p>
+        </div>
+        <table class="lesson-table">
+          <thead><tr><th>Number</th><th>Hmong (Njua)</th><th>Hmong (Daw)</th><th>Pronunciation</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="hmong-word">ib</td><td class="hmong-word">ob</td><td>[ib / ob]</td></tr>
+            <tr><td>2</td><td class="hmong-word">nruab</td><td class="hmong-word">nuaj</td><td>[nroo-ahb / nwoy]</td></tr>
+            <tr><td>3</td><td class="hmong-word">song</td><td class="hmong-word">sawg</td><td>[song / sawg]</td></tr>
+            <tr><td>4</td><td class="hmong-word">siab</td><td class="hmong-word">siab</td><td>[see-ahb]</td></tr>
+            <tr><td>5</td><td class="hmong-word">plig</td><td class="hmong-word">plig</td><td>[plig]</td></tr>
+            <tr><td>6</td><td class="hmong-word">tshum</td><td class="hmong-word">tshum</td><td>[tshoome]</td></tr>
+            <tr><td>7</td><td class="hmong-word">hau</td><td class="hmong-word">hau</td><td>[how]</td></tr>
+            <tr><td>8</td><td class="hmong-word">plig peb</td><td class="hmong-word">plig peb</td><td>[plig peb]</td></tr>
+            <tr><td>9</td><td class="hmong-word">plig song</td><td class="hmong-word">plig sawg</td><td>[plig song]</td></tr>
+            <tr><td>10</td><td class="hmong-word">plig peb</td><td class="hmong-word">plig peb</td><td>[plig peb]</td></tr>
+            <tr><td>11</td><td class="hmong-word">ib plig peb</td><td class="hmong-word">ob plig peb</td><td>[ib plig peb]</td></tr>
+            <tr><td>12</td><td class="hmong-word">nruab plig peb</td><td class="hmong-word">nuaj plig peb</td><td>[nruab plig peb]</td></tr>
+            <tr><td>15</td><td class="hmong-word">plig peb plig</td><td class="hmong-word">plig peb plig</td><td>[plig peb plig]</td></tr>
+            <tr><td>20</td><td class="hmong-word">ob plig peb</td><td class="hmong-word">nuaj plig peb</td><td>[ob plig peb]</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 24px; padding: 20px; background: var(--color-cream); border-radius: 8px;">
+          <strong>💡 Tip:</strong> Hmong uses a base-20 counting system in some contexts. Numbers 11–19 are formed by adding the unit digit to 10. The word "plig" (five) is a key building block.
+        </div>
+      </div>
+
+      <!-- Family -->
+      <div class="lesson-content" id="tab-family">
+        <div class="section-header">
+          <h2>👨‍👩‍👧‍👦 Family Terms</h2>
+          <p>Family is central to Hmong culture. These terms reflect deep respect for elders.</p>
+        </div>
+        <table class="lesson-table">
+          <thead><tr><th>Hmong</th><th>Pronunciation</th><th>English</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="hmong-word">Tus neeg</td><td class="pronunciation">[tus neeg]</td><td>People</td><td></td></tr>
+            <tr><td class="hmong-word">Vaj</td><td class="pronunciation">[vahj]</td><td>Grandfather</td><td>Respectful term</td></tr>
+            <tr><td class="hmong-word">Nkauj</td><td class="pronunciation">[nkowj]</td><td>Grandmother</td><td>Respectful term</td></tr>
+            <tr><td class="hmong-word">Tus</td><td class="pronunciation">[tus]</td><td>Grandparent (neutral)</td><td></td></tr>
+            <tr><td class="hmong-word">Tawv</td><td class="pronunciation">[tow]</td><td>Father</td><td>Casual</td></tr>
+            <tr><td class="hmong-word">Dab</td><td class="pronunciation">[dahb]</td><td>Mother</td><td>Casual</td></tr>
+            <tr><td class="hmong-word">Tub</td><td class="pronunciation">[tob]</td><td>Son</td><td></td></tr>
+            <tr><td class="hmong-word">Yam</td><td class="pronunciation">[yam]</td><td>Daughter</td><td></td></tr>
+            <tr><td class="hmong-word">Tus ntsuab</td><td class="pronunciation">[tus ntsoob]</td><td>Sibling (older)</td><td>Respectful</td></tr>
+            <tr><td class="hmong-word">Tus me</td><td class="pronunciation">[tus meh]</td><td>Sibling (younger)</td><td></td></tr>
+            <tr><td class="hmong-word">Tus poj niam</td><td class="pronunciation">[tus poj nee-ahm]</td><td>Wife</td><td>Formal</td></tr>
+            <tr><td class="hmong-word">Tus neeg tsiaj</td><td class="pronunciation">[tus neeg tee-ahj]</td><td>Husband</td><td>Formal</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Food -->
+      <div class="lesson-content" id="tab-food">
+        <div class="section-header">
+          <h2>🍚 Food & Dining</h2>
+          <p>Hmong cuisine is a cornerstone of cultural identity. Learn food vocabulary and dining customs.</p>
+        </div>
+        <table class="lesson-table">
+          <thead><tr><th>Hmong</th><th>Pronunciation</th><th>English</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="hmong-word">Zaj</td><td class="pronunciation">[zahj]</td><td>Food</td><td>General term</td></tr>
+            <tr><td class="hmong-word">Zaj tsuaj</td><td class="pronunciation">[zahj tsoo-ahj]</td><td>Vegetables</td><td></td></tr>
+            <tr><td class="hmong-word">Zaj tsuab</td><td class="pronunciation">[zahj tsoo-ab]</td><td>Meat</td><td></td></tr>
+            <tr><td class="hmong-word">Zaj ntsuab</td><td class="pronunciation">[zahj ntsoob]</td><td>Rice</td><td>Staple food</td></tr>
+            <tr><td class="hmong-word">Tsuas</td><td class="pronunciation">[tsoos]</td><td>Water</td><td></td></tr>
+            <tr><td class="hmong-word">Zaj qab</td><td class="pronunciation">[zahj kub]</td><td>Delicious food</td><td></td></tr>
+            <tr><td class="hmong-word">Zaj phom</td><td class="pronunciation">[zahj pom]</td><td>Steamed rice</td><td>White rice</td></tr>
+            <tr><td class="hmong-word">Zaj nplaum</td><td class="pronunciation">[zahj nplowm]</td><td>Glutinous rice</td><td>Sticky rice, culturally important</td></tr>
+            <tr><td class="hmong-word">Laj</td><td class="pronunciation">[lahj]</td><td>Soup</td><td></td></tr>
+            <tr><td class="hmong-word">Zaj kua</td><td class="pronunciation">[zahj koo-ah]</td><td>Cooked food</td><td></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 24px; padding: 20px; background: var(--color-cream); border-radius: 8px;">
+          <strong>🍜 Cultural Note:</strong> Sticky rice (<em>zaj nplaum</em>) is central to Hmong meals. During festivals, families prepare it together — it symbolizes unity and shared labor.
+        </div>
+      </div>
+
+      <!-- Grammar -->
+      <div class="lesson-content" id="tab-grammar">
+        <div class="section-header">
+          <h2>📝 Grammar Basics</h2>
+          <p>Hmong grammar is surprisingly accessible for English speakers — no conjugations, no genders!</p>
+        </div>
+
+        <div class="culture-grid" style="margin-bottom: 32px;">
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>Word Order</h3>
+            </div>
+            <div class="culture-card-body">
+              <p>Hmong follows <strong>Subject-Verb-Object (SVO)</strong> order, just like English:</p>
+              <ul>
+                <li><strong>Kuv</strong> (I) <strong>xam</strong> (eat) <strong>zaj</strong> (food)</li>
+                <li><em>"I eat food"</em></li>
+                <li><strong>Koj</strong> (you) <strong>xam</strong> (eat) <strong>zaj tsuab</strong> (meat)</li>
+                <li><em>"You eat meat"</em></li>
+              </ul>
+            </div>
+          </div>
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>Tones</h3>
+            </div>
+            <div class="culture-card-body">
+              <p>Hmong has <strong>7 distinct tones</strong> that change word meaning:</p>
+              <ul>
+                <li><strong>Normal</strong> — no mark (e.g., <em>ib</em>)</li>
+                <li><strong>Sharp</strong> — apostrophe (e.g., <em>ib'</em>)</li>
+                <li><strong>Low falling</strong> — tilde (e.g., <em>ib~</em>)</li>
+                <li><strong>High rising</strong> — grave accent (e.g., <em>ib`</em>)</li>
+                <li><strong>Broken</strong> — final consonant (e.g., <em>ibx</em>)</li>
+                <li><strong>Heavy</strong> — final consonant (e.g., <em>ibq</em>)</li>
+                <li><strong>Glottal</strong> — final glottal stop (e.g., <em>ibh</em>)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="culture-grid">
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>Question Words</h3>
+            </div>
+            <div class="culture-card-body">
+              <ul>
+                <li><strong>Cov</strong> — What?</li>
+                <li><strong>Cov li</strong> — How?</li>
+                <li><strong>Cov nram</strong> — Where?</li>
+                <li><strong>Cov npe</strong> — Who?</li>
+                <li><strong>Cov yam</strong> — Why?</li>
+                <li><strong>Cov thaum</strong> — When?</li>
+              </ul>
+            </div>
+          </div>
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>Negation</h3>
+            </div>
+            <div class="culture-card-body">
+              <p>Simply add <strong>"tsis"</strong> before the verb:</p>
+              <ul>
+                <li><strong>Xam</strong> = eat → <strong>Tsis xam</strong> = don't eat</li>
+                <li><strong>Nyob</strong> = live/be → <strong>Tsis nyob</strong> = don't live</li>
+                <li><strong>Yog</strong> = is → <strong>Tsis yog</strong> = is not</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conversation -->
+      <div class="lesson-content" id="tab-conversation">
+        <div class="section-header">
+          <h2>💬 Everyday Conversations</h2>
+          <p>Practice common dialogues you'll encounter in daily Hmong life.</p>
+        </div>
+
+        <div class="culture-grid" style="margin-bottom: 32px;">
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>Meeting Someone</h3>
+            </div>
+            <div class="culture-card-body">
+              <p><strong>A:</strong> Nyob zoo! [nyob zow]</p>
+              <p><strong>B:</strong> Nyob zoo! [nyob zow]</p>
+              <p><strong>A:</strong> Koj lub npe li? [kow loob nee pee lee?]</p>
+              <p><strong>B:</strong> Kuv lub npe yog [koo loob nee yong]... Koj lub npe li?</p>
+              <p><strong>A:</strong> Kuv lub npe yog [koo loob nee yong]... Ua tsaug! [ow tsowg]</p>
+            </div>
+          </div>
+          <div class="culture-card">
+            <div class="culture-card-header">
+              <h3>At the Market</h3>
+            </div>
+            <div class="culture-card-body">
+              <p><strong>A:</strong> Zaj no muaj dab tsi? [zahj no mooj dab tee?]</p>
+              <p><strong>B:</strong> Zaj no muaj zaj tsuaj thiab zaj tsuab. [zahj no mooj...]</p>
+              <p><strong>A:</strong> Zaj no ntau npaum li cas? [zahj no naw pawm lee kas?]</p>
+              <p><strong>B:</strong> Zaj no ntau ib plig peb tuag. [zahj no naw ib plig peb...]</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="culture-card" style="margin-bottom: 32px;">
+          <div class="culture-card-header">
+            <h3>Asking About Family</h3>
+          </div>
+          <div class="culture-card-body">
+            <p><strong>A:</strong> Koj muaj tus neeg muaj ntau npaum li cas? [kow mooj...]</p>
+            <p><strong>B:</strong> Kuv muaj peb tus neeg. [koo mooj peb tus neeg]</p>
+            <p><strong>A:</strong> Koj tus vaj nyob li? [kow tus vahj nyob lee?]</p>
+            <p><strong>B:</strong> Koj tus vaj nyob hauv teb chaws. [kow tus vahj nyob howv...]</p>
+          </div>
+        </div>
+
+        <div style="padding: 20px; background: var(--color-cream); border-radius: 8px;">
+          <strong>🎯 Practice Tip:</strong> Try speaking these aloud with a partner. Hmong tones are best learned by ear — listen to native speakers and mimic their intonation patterns. The more you practice speaking, the more natural the tones will become!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hmong-border-thick"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Hmong<span>Heritage</span></h3>
+        <p>A community-driven project dedicated to preserving and sharing Hmong language, culture, and history.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Language Lessons</a></li>
+          <li><a href="../culture/index.html">Culture & Traditions</a></li>
+          <li><a href="../about/index.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Hmong Dictionary</a></li>
+          <li><a href="#">Pronunciation Guide</a></li>
+          <li><a href="#">Community Links</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 HmongHeritage — Preserving our past, empowering our future.</p>
+    </div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
