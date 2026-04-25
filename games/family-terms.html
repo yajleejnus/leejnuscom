@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👨‍👩‍👧‍👦 Family Terms — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .family-card {
+      text-align: center; padding: 40px; background: var(--color-cream); border-radius: 12px;
+      margin-bottom: 24px; border: 2px solid var(--color-hmong-red);
+    }
+    .family-icon { font-size: 4rem; margin-bottom: 12px; }
+    .family-hmong { font-size: 2rem; font-weight: 700; color: var(--color-hmong-red); margin-bottom: 4px; }
+    .family-hint { font-size: 0.95rem; opacity: 0.6; }
+    .family-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .family-btn {
+      padding: 18px 12px; border: 2px solid #ccc; background: white; border-radius: 8px;
+      cursor: pointer; font-size: 1rem; text-align: center; transition: all 0.2s;
+    }
+    .family-btn:hover { border-color: var(--color-hmong-red); }
+    .family-btn.correct { background: #22c55e; border-color: #22c55e; color: white; }
+    .family-btn.wrong { background: #ef4444; border-color: #ef4444; color: white; }
+    .family-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    @media (max-width: 500px) { .family-options { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-header"><h1>👨‍👩‍👧‍👦 Family Terms</h1><p>Match the Hmong word to the family member</p></div>
+    <div class="score-bar"><span>Score: <strong id="score">0</strong></span><span>Round: <strong id="round">1</strong></span></div>
+    <div class="family-card">
+      <div class="family-icon" id="familyIcon">👤</div>
+      <div class="family-hmong" id="familyHmong">...</div>
+      <div class="family-hint" id="familyHint">...</div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="family-options" id="familyOptions"></div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const family = [
+      { hmong: 'dab neeg', english: 'Grandfather', icon: '👴' },
+      { hmong: 'dab neeg muag', english: 'Grandmother', icon: '👵' },
+      { hmong: 'neeg', english: 'Father', icon: '👨' },
+      { hmong: 'neeg muag', english: 'Mother', icon: '👩' },
+      { hmong: 'hluas', english: 'Older brother', icon: '👦' },
+      { hmong: 'hluas muag', english: 'Older sister', icon: '👧' },
+      { hmong: 'tsaus', english: 'Younger brother', icon: '👦' },
+      { hmong: 'tsaus muag', english: 'Younger sister', icon: '👧' },
+      { hmong: 'txiv neeb', english: 'Uncle (paternal)', icon: '👨' },
+      { hmong: 'neeg muag', english: 'Aunt (maternal)', icon: '👩' },
+      { hmong: 'neeg', english: 'Spouse', icon: '💑' },
+      { hmong: 'yuam', english: 'Child', icon: '👶' },
+      { hmong: 'yuam tsis', english: 'Baby', icon: '🍼' },
+      { hmong: 'txawg', english: 'Cousin (older)', icon: '🧑' },
+      { hmong: 'txawg muag', english: 'Cousin (younger)', icon: '🧒' }
+    ];
+
+    let score = 0, round = 1, current = null, totalRounds = 10;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function loadFamily() {
+      if (round > totalRounds) {
+        document.querySelector('.family-card').innerHTML = `<div class="family-icon">🎉</div><div class="family-hmong">Final score: ${score}/${totalRounds * 10}</div>`;
+        document.getElementById('familyOptions').innerHTML = '<button class="btn btn-primary" onclick="location.reload()">Play Again</button>';
+        return;
+      }
+
+      current = family[Math.floor(Math.random() * family.length)];
+      document.getElementById('familyIcon').textContent = current.icon;
+      document.getElementById('familyHmong').textContent = current.hmong;
+      document.getElementById('familyHint').textContent = `Choose the family member`;
+      document.getElementById('feedback').textContent = '';
+
+      const wrong = shuffle(family.filter(f => f.hmong !== current.hmong)).slice(0, 3);
+      const options = shuffle([current, ...wrong]);
+
+      const container = document.getElementById('familyOptions');
+      container.innerHTML = '';
+      options.forEach(f => {
+        const btn = document.createElement('button');
+        btn.className = 'family-btn';
+        btn.textContent = `${f.icon} ${f.english}`;
+        btn.onclick = () => checkFamily(f, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkFamily(selected, btn) {
+      const allBtns = document.querySelectorAll('.family-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selected.english === current.english) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').innerHTML = `<span style="color:#22c55e">✅ Correct!</span>`;
+        score += 10;
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach(b => { if (b.textContent.includes(current.english)) b.classList.add('correct'); });
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ It was "${current.english}" (${current.hmong})</span>`;
+      }
+
+      document.getElementById('score').textContent = score;
+      round++;
+      document.getElementById('round').textContent = round;
+      setTimeout(loadFamily, 1200);
+    }
+
+    loadFamily();
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍜 Food Match — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .food-card {
+      text-align: center; padding: 40px; background: var(--color-cream); border-radius: 12px;
+      margin-bottom: 24px; border: 2px solid var(--color-hmong-red);
+    }
+    .food-icon { font-size: 5rem; margin-bottom: 12px; }
+    .food-hmong { font-size: 2rem; font-weight: 700; color: var(--color-hmong-red); }
+    .food-hint { font-size: 0.95rem; opacity: 0.6; }
+    .food-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .food-btn {
+      padding: 18px 12px; border: 2px solid #ccc; background: white; border-radius: 8px;
+      cursor: pointer; font-size: 1rem; text-align: center; transition: all 0.2s;
+    }
+    .food-btn:hover { border-color: var(--color-hmong-red); }
+    .food-btn.correct { background: #22c55e; border-color: #22c55e; color: white; }
+    .food-btn.wrong { background: #ef4444; border-color: #ef4444; color: white; }
+    .food-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    @media (max-width: 500px) { .food-options { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-header"><h1>🍜 Food Match</h1><p>What food is this in Hmong?</p></div>
+    <div class="score-bar"><span>Score: <strong id="score">0</strong></span><span>Round: <strong id="round">1</strong></span></div>
+    <div class="food-card">
+      <div class="food-icon" id="foodIcon">🍜</div>
+      <div class="food-hmong" id="foodHmong">...</div>
+      <div class="food-hint" id="foodHint">Choose the Hmong word</div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="food-options" id="foodOptions"></div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const foods = [
+      { english: 'Rice', hmong: 'ua', icon: '🍚' },
+      { english: 'Noodles', hmong: 'kuam tsu', icon: '🍜' },
+      { english: 'Pork', hmong: 'hmoov', icon: '🥩' },
+      { english: 'Chicken', hmong: 'laum', icon: '🍗' },
+      { english: 'Fish', hmong: 'plaw', icon: '🐟' },
+      { english: 'Vegetables', hmong: 'tsw', icon: '🥬' },
+      { english: 'Tomato', hmong: 'tom taw', icon: '🍅' },
+      { english: 'Bean sprouts', hmong: 'kab', icon: '🌱' },
+      { english: 'Bamboo shoots', hmong: 'ntaj', icon: '🎋' },
+      { english: 'Mango', hmong: 'maaw', icon: '🥭' },
+      { english: 'Banana', hmong: 'noob', icon: '🍌' },
+      { english: 'Papaya', hmong: 'noob suab', icon: '🍈' },
+      { english: 'Sour soup', hmong: 'noob suab', icon: '🍲' },
+      { english: 'Dip', hmong: 'jua', icon: '🫙' },
+      { english: 'Salt', hmong: 'huv', icon: '🧂' },
+      { english: 'Soy sauce', hmong: 'siaw', icon: '🥢' },
+      { english: 'Chili', hmong: 'daj', icon: '🌶️' },
+      { english: 'Garlic', hmong: 'nplua', icon: '🧄' },
+      { english: 'Ginger', hmong: 'xwm', icon: '🫚' },
+      { english: 'Herbs', hmong: 'txob', icon: '🌿' }
+    ];
+
+    let score = 0, round = 1, current = null, totalRounds = 10;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function loadFood() {
+      if (round > totalRounds) {
+        document.querySelector('.food-card').innerHTML = `<div class="food-icon">🎉</div><div class="food-hmong">Final score: ${score}/${totalRounds * 10}</div>`;
+        document.getElementById('foodOptions').innerHTML = '<button class="btn btn-primary" onclick="location.reload()">Play Again</button>';
+        return;
+      }
+
+      current = foods[Math.floor(Math.random() * foods.length)];
+      document.getElementById('foodIcon').textContent = current.icon;
+      document.getElementById('foodHmong').textContent = current.english;
+      document.getElementById('foodHint').textContent = 'Choose the Hmong word';
+      document.getElementById('feedback').textContent = '';
+
+      const wrong = shuffle(foods.filter(f => f.hmong !== current.hmong)).slice(0, 3).map(f => f.hmong);
+      const uniqueWrong = [...new Set(wrong)].slice(0, 3);
+      const options = shuffle([current.hmong, ...uniqueWrong]);
+
+      const container = document.getElementById('foodOptions');
+      container.innerHTML = '';
+      options.forEach(h => {
+        const btn = document.createElement('button');
+        btn.className = 'food-btn';
+        btn.textContent = h;
+        btn.onclick = () => checkFood(h, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkFood(selected, btn) {
+      const allBtns = document.querySelectorAll('.food-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selected === current.hmong) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').innerHTML = `<span style="color:#22c55e">✅ "${current.hmong}"!</span>`;
+        score += 10;
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach(b => { if (b.textContent === current.hmong) b.classList.add('correct'); });
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ It was "${current.hmong}"</span>`;
+      }
+
+      document.getElementById('score').textContent = score;
+      round++;
+      document.getElementById('round').textContent = round;
+      setTimeout(loadFood, 1200);
+    }
+
+    loadFood();
+  </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎨 Color Match — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .color-display {
+      text-align: center; padding: 60px 20px; border-radius: 12px; margin-bottom: 24px;
+      transition: background-color 0.3s; border: 3px solid rgba(0,0,0,0.1);
+    }
+    .color-display .hint { font-size: 1.2rem; opacity: 0.8; }
+    .color-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .color-btn {
+      padding: 20px 12px; border: 3px solid rgba(0,0,0,0.1); border-radius: 8px;
+      cursor: pointer; font-size: 1rem; font-weight: 600; text-align: center;
+      transition: all 0.2s; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+    .color-btn:hover { transform: scale(1.05); }
+    .color-btn.correct { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.3); }
+    .color-btn.wrong { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.3); }
+    .color-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    .game-nav { text-align: center; }
+    @media (max-width: 500px) { .color-options { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-header"><h1>🎨 Color Match</h1><p>What color is this?</p></div>
+    <div class="score-bar"><span>Score: <strong id="score">0</strong></span><span>Round: <strong id="round">1</strong></span></div>
+    <div class="color-display" id="colorDisplay"><div class="hint" id="colorHint">...</div></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="color-options" id="colorOptions"></div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const colors = [
+      { name: 'Red', hmong: 'daj', hex: '#dc2626' },
+      { name: 'Blue', hmong: 'xiav', hex: '#2563eb' },
+      { name: 'Green', hmong: 'ntuam', hex: '#16a34a' },
+      { name: 'Yellow', hmong: 'siav', hex: '#eab308' },
+      { name: 'White', hmong: 'dawb', hex: '#f8fafc' },
+      { name: 'Black', hmong: 'dub', hex: '#1e293b' },
+      { name: 'Orange', hmong: 'tawb', hex: '#ea580c' },
+      { name: 'Purple', hmong: 'ntoo', hex: '#7c3aed' },
+      { name: 'Pink', hmong: 'daj liab', hex: '#ec4899' },
+      { name: 'Brown', hmong: 'xoob', hex: '#92400e' },
+      { name: 'Gray', hmong: 'xws liab', hex: '#6b7280' },
+      { name: 'Teal', hmong: 'ntuam liab', hex: '#0d9488' }
+    ];
+
+    let score = 0, round = 1, current = null, totalRounds = 10;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function loadColor() {
+      if (round > totalRounds) {
+        document.getElementById('colorDisplay').innerHTML = `<div class="hint">🎉 Final score: ${score}/${totalRounds * 10}</div>`;
+        document.getElementById('colorDisplay').style.background = '#f0fdf4';
+        document.getElementById('colorOptions').innerHTML = '<button class="btn btn-primary" onclick="location.reload()">Play Again</button>';
+        return;
+      }
+
+      current = colors[Math.floor(Math.random() * colors.length)];
+      const display = document.getElementById('colorDisplay');
+      display.style.background = current.hex;
+      const textColor = ['#daj','#xiav','#ntuam','#siav','#xoob','#xws liab'].includes(current.hmong) ? '#fff' : '#000';
+      display.style.textShadow = '0 1px 3px rgba(0,0,0,0.4)';
+      document.getElementById('colorHint').textContent = `What color is this?`;
+
+      const wrongColors = shuffle(colors.filter(c => c.hmong !== current.hmong)).slice(0, 3);
+      const options = shuffle([current, ...wrongColors]);
+
+      const container = document.getElementById('colorOptions');
+      container.innerHTML = '';
+      options.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'color-btn';
+        btn.style.background = c.hex;
+        btn.style.color = (c.hex === '#f8fafc' || c.hex === '#eab308') ? '#000' : '#fff';
+        btn.textContent = c.name;
+        btn.onclick = () => checkColor(c, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkColor(selected, btn) {
+      const allBtns = document.querySelectorAll('.color-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selected.hmong === current.hmong) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').innerHTML = `<span style="color:#22c55e">✅ ${current.hmong}!</span>`;
+        score += 10;
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach(b => { if (b.textContent === selected.name) b.classList.add('wrong'); });
+        allBtns.forEach(b => { if (b.textContent === current.name) b.classList.add('correct'); });
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ It was "${current.hmong}"</span>`;
+      }
+
+      document.getElementById('score').textContent = score;
+      round++;
+      document.getElementById('round').textContent = round;
+      setTimeout(loadColor, 1200);
+    }
+
+    loadColor();
+  </script>
+</body>
+</html>
