@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔢 Numbers Challenge — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .number-display { text-align: center; padding: 40px; background: var(--color-cream); border-radius: 12px; margin-bottom: 24px; }
+    .big-number { font-size: 5rem; font-weight: 700; color: var(--color-hmong-red); line-height: 1; }
+    .timer { font-size: 1.5rem; color: var(--color-dark); opacity: 0.6; margin-top: 8px; }
+    .number-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .number-btn {
+      padding: 20px 12px; border: 2px solid var(--color-hmong-red); background: white;
+      border-radius: 8px; cursor: pointer; font-size: 1.2rem; font-weight: 600;
+      text-align: center; transition: all 0.2s;
+    }
+    .number-btn:hover { background: var(--color-hmong-red); color: white; }
+    .number-btn.correct { background: #22c55e; border-color: #22c55e; color: white; }
+    .number-btn.wrong { background: #ef4444; border-color: #ef4444; color: white; }
+    .number-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    .game-nav { text-align: center; margin-top: 20px; }
+    .game-over { text-align: center; padding: 40px; }
+    .game-over h2 { color: var(--color-hmong-red); font-size: 2rem; }
+    .game-over .final-score { font-size: 3rem; color: var(--color-hmong-red); font-weight: 700; }
+    @media (max-width: 500px) {
+      .number-options { grid-template-columns: 1fr 1fr; }
+      .big-number { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container" id="gameArea">
+    <div class="game-header">
+      <h1>🔢 Numbers Challenge</h1>
+      <p>What is this number in Hmong?</p>
+    </div>
+    <div class="score-bar">
+      <span>Score: <strong id="score">0</strong></span>
+      <span>Time: <strong id="timer">30</strong>s</span>
+    </div>
+    <div class="number-display">
+      <div class="big-number" id="bigNumber">?</div>
+      <div class="timer" id="timerDisplay">30</div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="number-options" id="numberOptions"></div>
+    <div class="game-nav">
+      <button class="btn btn-primary" id="startBtn" onclick="startGame()">Start Game 🎮</button>
+    </div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const numbers = {
+      0:'sis', 1:'peb', 2:'nruas', 3:'peb', 4:'sis', 5:'tia',
+      6:'hiaj', 7:'tug', 8:'yuas', 9:'am', 10:'xib',
+      11:'xib peb', 12:'xib nruas', 13:'xib peb', 14:'xib sis', 15:'xib tia',
+      16:'xib hiaj', 17:'xib tug', 18:'xib yuas', 19:'xib am', 20:'plig',
+      21:'plig peb', 22:'plig nruas', 23:'plig peb', 24:'plig sis', 25:'plig tia',
+      30:'plig xib', 31:'plig xib peb', 40:'plig plig', 41:'plig plig peb',
+      50:'plig plig plig', 60:'plig plig xib', 70:'plig plig tug', 80:'plig plig yuas',
+      90:'plig plig am', 100:'plig plig plig plig'
+    };
+
+    let score = 0, timeLeft = 30, timerInterval = null, currentNum = 0, gameActive = false;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function generateQuestion() {
+      const keys = Object.keys(numbers).map(Number);
+      currentNum = keys[Math.floor(Math.random() * keys.length)];
+      document.getElementById('bigNumber').textContent = currentNum;
+
+      const correct = numbers[currentNum];
+      const wrong = shuffle(Object.values(numbers)).filter(w => w !== correct).slice(0, 3);
+      const options = shuffle([correct, ...wrong]);
+
+      const container = document.getElementById('numberOptions');
+      container.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'number-btn';
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, btn) {
+      if (!gameActive) return;
+      const allBtns = document.querySelectorAll('.number-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selected === numbers[currentNum]) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').innerHTML = '<span style="color:#22c55e">✅ Correct!</span>';
+        score += 10;
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach(b => {
+          if (b.textContent === numbers[currentNum]) b.classList.add('correct');
+        });
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ It was "${numbers[currentNum]}"</span>`;
+      }
+
+      document.getElementById('score').textContent = score;
+      setTimeout(() => {
+        document.getElementById('feedback').textContent = '';
+        generateQuestion();
+      }, 1000);
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      gameActive = true;
+      document.getElementById('score').textContent = '0';
+      document.getElementById('timer').textContent = '30';
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('feedback').textContent = '';
+
+      generateQuestion();
+
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        document.getElementById('timerDisplay').textContent = timeLeft;
+        if (timeLeft <= 5) {
+          document.getElementById('timerDisplay').style.color = '#ef4444';
+        }
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          gameActive = false;
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      document.getElementById('bigNumber').textContent = '⏰';
+      document.getElementById('numberOptions').innerHTML = '';
+      document.getElementById('feedback').innerHTML = '';
+
+      document.getElementById('gameArea').innerHTML = `
+        <div class="game-over">
+          <h2>Time's Up!</h2>
+          <div class="final-score">${score}</div>
+          <p>points</p>
+          <button class="btn btn-primary" onclick="resetGame()">Play Again 🔄</button>
+        </div>
+      `;
+    }
+
+    function resetGame() {
+      location.reload();
+    }
+  </script>
+</body>
+</html>

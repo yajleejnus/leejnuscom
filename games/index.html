@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Hmong Language Games — Kev Cai Hmoob</title>
+  <meta name="description" content="Interactive Hmong language learning games for all ages.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .game-card {
+      background: var(--color-cream);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      transition: transform 0.2s;
+      border: 2px solid var(--color-hmong-red);
+    }
+    .game-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(200,30,30,0.15);
+    }
+    .game-card .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .game-card h3 {
+      color: var(--color-hmong-red);
+      margin-bottom: 8px;
+    }
+    .game-card p {
+      color: var(--color-dark);
+      opacity: 0.8;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .game-card .btn {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero" style="text-align:center; padding: 60px 20px 30px;">
+    <div class="hero-content">
+      <div class="hmong-title">Lub Teb Hmoob</div>
+      <h1>Hmong Language <span>Games</span></h1>
+      <p>Learn Hmong through play! Pick a game below and start practicing.</p>
+    </div>
+  </section>
+
+  <div class="hmong-border-thick"></div>
+
+  <div class="games-grid">
+    <div class="game-card">
+      <div class="icon">🎯</div>
+      <h3>Tone Trainer</h3>
+      <p>Match Hmong words to their correct tones. Hmong has 6 tones — learn to hear and produce them.</p>
+      <a href="tone-trainer.html" class="btn btn-primary">Play Now</a>
+    </div>
+    <div class="game-card">
+      <div class="icon">🔤</div>
+      <h3>Word Match</h3>
+      <p>Connect Hmong words to their English meanings. Great for building vocabulary.</p>
+      <a href="word-match.html" class="btn btn-primary">Play Now</a>
+    </div>
+    <div class="game-card">
+      <div class="icon">🔢</div>
+      <h3>Numbers Challenge</h3>
+      <p>Learn Hmong numbers 0–100. Match digits to Hmong words before time runs out.</p>
+      <a href="numbers.html" class="btn btn-primary">Play Now</a>
+    </div>
+    <div class="game-card">
+      <div class="icon">🧩</div>
+      <h3>Phrase Builder</h3>
+      <p>Drag words into the correct order to build proper Hmong sentences.</p>
+      <a href="phrase-builder.html" class="btn btn-primary">Play Now</a>
+    </div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Hmong<span>Heritage</span></h3>
+        <p>A community-driven project dedicated to preserving and sharing Hmong language, culture, and history.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../language/index.html">Language Lessons</a></li>
+          <li><a href="../culture/index.html">Culture & Traditions</a></li>
+          <li><a href="../about/index.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+          <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+          <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 HmongHeritage — Preserving our past, empowering our future.</p>
+    </div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

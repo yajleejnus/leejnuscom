@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧩 Phrase Builder — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .prompt { text-align: center; padding: 24px; background: var(--color-cream); border-radius: 12px; margin-bottom: 24px; }
+    .prompt .english { font-size: 1.3rem; font-weight: 600; margin-bottom: 4px; }
+    .prompt .hint { font-size: 0.95rem; opacity: 0.6; }
+    .answer-zone {
+      min-height: 70px; border: 2px dashed #ccc; border-radius: 8px;
+      padding: 16px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px;
+      align-items: center; justify-content: center;
+    }
+    .answer-zone.filled { border-color: var(--color-hmong-red); border-style: solid; }
+    .answer-zone.correct { border-color: #22c55e; background: #f0fdf4; }
+    .answer-zone.wrong { border-color: #ef4444; background: #fef2f2; }
+    .word-chip {
+      padding: 10px 18px; background: white; border: 2px solid var(--color-hmong-red);
+      border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 1rem;
+      transition: all 0.2s; user-select: none;
+    }
+    .word-chip:hover { background: #fef2f2; }
+    .word-chip.in-answer { background: var(--color-hmong-red); color: white; }
+    .word-chip.in-choices { opacity: 0.5; pointer-events: none; }
+    .choices { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    .game-nav { text-align: center; margin-top: 20px; }
+    .check-btn { margin: 0 8px; }
+    @media (max-width: 500px) {
+      .word-chip { padding: 8px 14px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-header">
+      <h1>🧩 Phrase Builder</h1>
+      <p>Tap words in the correct order to build the sentence</p>
+    </div>
+    <div class="score-bar">
+      <span>Score: <strong id="score">0</strong></span>
+      <span>Completed: <strong id="completed">0</strong></span>
+    </div>
+    <div class="prompt">
+      <div class="english" id="promptEnglish">...</div>
+      <div class="hint" id="promptHint"></div>
+    </div>
+    <div class="answer-zone" id="answerZone"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="game-nav">
+      <button class="btn btn-primary check-btn" onclick="checkAnswer()">Check ✓</button>
+      <button class="btn btn-outline check-btn" onclick="clearAnswer()">Clear</button>
+      <button class="btn btn-primary" id="nextBtn" style="display:none;" onclick="nextPhrase()">Next →</button>
+    </div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const phrases = [
+      { english: 'I am good', hint: 'Basic greeting', hmong: ['Kuv', 'nyuaj', 'siab'] },
+      { english: 'What is your name?', hint: 'Common question', hmong: ['Koj', 'muaj', 'npe', 'li', 'nyuaj', 'li', 'ntawm'] },
+      { english: 'Thank you', hint: 'Essential phrase', hmong: ['Ua', 'thawj', 'lus'] },
+      { english: 'Good morning', hint: 'Morning greeting', hmong: ['Hnub', 'tom', 'ab', 'no', 'siab'] },
+      { english: 'I love you', hint: 'Express feelings', hmong: ['Kuv', 'nyuam', 'chuam', 'koj'] },
+      { english: 'How are you?', hint: 'Common greeting', hmong: ['Koj', 'muaj', 'keeb', 'kwm', 'li', 'nyuaj', 'li', 'ntawm'] },
+      { english: 'See you later', hint: 'Farewell', hmong: ['Tom', 'ab', 'nyob', 'ze', 'tag', 'nis'] },
+      { english: 'I understand', hint: 'Show comprehension', hmong: ['Kuv', 'paub', 'nyuaj'] },
+      { english: 'Where are you from?', hint: 'Ask origins', hmong: ['Koj', 'nyob', 'ze', 'tag', 'nis', 'li', 'nyuaj', 'li', 'ntawm'] },
+      { english: 'My name is...', hint: 'Introduce yourself', hmong: ['Kuv', 'muaj', 'npe', 'hu', 'ua', 'tiag', 'hais'] }
+    ];
+
+    let score = 0, completed = 0, currentPhrase = null, answer = [];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function loadPhrase() {
+      currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+      answer = [];
+      document.getElementById('promptEnglish').textContent = `"${currentPhrase.english}"`;
+      document.getElementById('promptHint').textContent = `💡 ${currentPhrase.hint}`;
+      document.getElementById('answerZone').textContent = '';
+      document.getElementById('answerZone').className = 'answer-zone';
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+
+      // Create word chips (shuffled)
+      const words = shuffle([...currentPhrase.hmong]);
+      const choices = document.getElementById('choices');
+      choices.innerHTML = '';
+      words.forEach((word, i) => {
+        const chip = document.createElement('div');
+        chip.className = 'word-chip';
+        chip.textContent = word;
+        chip.dataset.word = word;
+        chip.dataset.index = i;
+        chip.onclick = () => toggleWord(chip);
+        choices.appendChild(chip);
+      });
+    }
+
+    function toggleWord(chip) {
+      if (chip.classList.contains('in-answer')) {
+        chip.classList.remove('in-answer');
+        chip.classList.add('in-choices');
+        answer = answer.filter(w => w !== chip.dataset.word || (w === chip.dataset.word && answer.indexOf(chip.dataset.word) !== answer.lastIndexOf(chip.dataset.word)));
+        // Use DOM-based tracking
+        answer = [];
+        document.querySelectorAll('.word-chip.in-answer').forEach(c => answer.push(c.dataset.word));
+      } else {
+        chip.classList.remove('in-choices');
+        chip.classList.add('in-answer');
+      }
+
+      const zone = document.getElementById('answerZone');
+      zone.innerHTML = '';
+      answer.forEach(w => {
+        const span = document.createElement('span');
+        span.className = 'word-chip in-answer';
+        span.textContent = w;
+        span.onclick = () => {
+          // Remove this word
+          document.querySelectorAll('.word-chip').forEach(c => {
+            if (c.dataset.word === w && c.classList.contains('in-answer')) {
+              c.classList.remove('in-answer');
+              c.classList.add('in-choices');
+              return;
+            }
+          });
+          answer = answer.filter(x => x !== w);
+          zone.innerHTML = '';
+          answer.forEach(x => {
+            const s = document.createElement('span');
+            s.className = 'word-chip in-answer';
+            s.textContent = x;
+            zone.appendChild(s);
+          });
+          updateZoneStyle();
+        };
+        zone.appendChild(span);
+      });
+      updateZoneStyle();
+    }
+
+    function updateZoneStyle() {
+      const zone = document.getElementById('answerZone');
+      if (answer.length > 0) {
+        zone.classList.add('filled');
+      } else {
+        zone.classList.remove('filled');
+      }
+    }
+
+    function checkAnswer() {
+      if (answer.length === 0) return;
+
+      const correct = currentPhrase.hmong.join(' ');
+      const attempt = answer.join(' ');
+
+      if (attempt === correct) {
+        document.getElementById('answerZone').classList.add('correct');
+        document.getElementById('feedback').innerHTML = `<span style="color:#22c55e">✅ Correct! "${currentPhrase.hmong.join(' ')}"</span>`;
+        score += 10;
+        completed++;
+      } else {
+        document.getElementById('answerZone').classList.add('wrong');
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ Correct: "${currentPhrase.hmong.join(' ')}"</span>`;
+      }
+
+      document.getElementById('score').textContent = score;
+      document.getElementById('completed').textContent = completed;
+      document.getElementById('nextBtn').style.display = 'inline-block';
+
+      document.querySelectorAll('.word-chip').forEach(c => c.style.pointerEvents = 'none');
+    }
+
+    function clearAnswer() {
+      answer = [];
+      document.getElementById('answerZone').innerHTML = '';
+      document.getElementById('answerZone').className = 'answer-zone';
+      document.querySelectorAll('.word-chip').forEach(c => {
+        c.classList.remove('in-answer');
+        c.classList.add('in-choices');
+        c.style.pointerEvents = '';
+      });
+      document.getElementById('feedback').textContent = '';
+    }
+
+    function nextPhrase() {
+      loadPhrase();
+    }
+
+    loadPhrase();
+  </script>
+</body>
+</html>

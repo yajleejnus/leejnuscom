@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Tone Trainer — Hmong Language Games</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .game-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-header h1 { color: var(--color-hmong-red); }
+    .score-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.1rem; }
+    .word-display { text-align: center; padding: 40px; background: var(--color-cream); border-radius: 12px; margin-bottom: 24px; }
+    .hmong-word { font-size: 3rem; font-weight: 700; color: var(--color-dark); margin-bottom: 8px; }
+    .english-hint { font-size: 1.1rem; opacity: 0.7; }
+    .tone-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .tone-btn {
+      padding: 18px 12px; border: 2px solid var(--color-hmong-red); background: white;
+      border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;
+      transition: all 0.2s; text-align: center;
+    }
+    .tone-btn:hover { background: var(--color-hmong-red); color: white; }
+    .tone-btn.correct { background: #22c55e; border-color: #22c55e; color: white; }
+    .tone-btn.wrong { background: #ef4444; border-color: #ef4444; color: white; }
+    .tone-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .tone-label { display: block; font-size: 1.1rem; }
+    .tone-desc { display: block; font-size: 0.8rem; opacity: 0.7; font-weight: 400; margin-top: 4px; }
+    .feedback { text-align: center; font-size: 1.2rem; min-height: 30px; margin-bottom: 16px; }
+    .game-nav { text-align: center; margin-top: 20px; }
+    .progress { font-size: 0.9rem; opacity: 0.6; text-align: center; margin-bottom: 16px; }
+    @media (max-width: 500px) {
+      .tone-options { grid-template-columns: 1fr; }
+      .hmong-word { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="hmong-border"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Hmong<span>Heritage</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="../language/index.html">📖 Language</a></li>
+        <li><a href="../culture/index.html">🎭 Culture</a></li>
+        <li><a href="../about/index.html">👥 About</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-header">
+      <h1>🎯 Tone Trainer</h1>
+      <p>Identify the tone of the Hmong word</p>
+    </div>
+    <div class="progress" id="progress"></div>
+    <div class="score-bar">
+      <span>Score: <strong id="score">0</strong></span>
+      <span>Streak: <strong id="streak">0</strong> 🔥</span>
+    </div>
+    <div class="word-display">
+      <div class="hmong-word" id="hmongWord">...</div>
+      <div class="english-hint" id="englishHint"></div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="tone-options" id="toneOptions"></div>
+    <div class="game-nav">
+      <button class="btn btn-primary" id="nextBtn" style="display:none;" onclick="nextQuestion()">Next Word →</button>
+    </div>
+  </div>
+
+  <div class="hmong-border-thick"></div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><h3>Hmong<span>Heritage</span></h3></div>
+      <div class="footer-links"><h4>Resources</h4><ul>
+        <li><a href="https://www.hmongdictionary.org/" target="_blank" rel="noopener">Hmong Dictionary</a></li>
+        <li><a href="https://www.hmonglanguage.com/pronunciation-guide/" target="_blank" rel="noopener">Pronunciation Guide</a></li>
+        <li><a href="https://www.hmong.org/" target="_blank" rel="noopener">Community Links</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 HmongHeritage</p></div>
+  </footer>
+  <div class="hmong-border"></div>
+
+  <script>
+    const tones = [
+      { id: 'plain', label: 'Plain (No H)', desc: 'No special tone' },
+      { id: 'h', label: 'H Tone', desc: 'Breathy / glottal stop' },
+      { id: 'b', label: 'B Tone', desc: 'Low falling' },
+      { id: 'j', label: 'J Tone', desc: 'High rising' },
+      { id: 'x', label: 'X Tone', desc: 'Low rising' },
+      { id: 'm', label: 'M Tone', desc: 'Glottalized / creaky' }
+    ];
+
+    const words = [
+      { word: 'nyuj', meaning: 'dog', tone: 'j' },
+      { word: 'ntuj', meaning: 'sky', tone: 'j' },
+      { word: 'daj', meaning: 'tall', tone: 'j' },
+      { word: 'dawj', meaning: 'cook', tone: 'j' },
+      { word: 'haws', meaning: 'open', tone: 's' },
+      { word: 'hau', meaning: 'in', tone: 'h' },
+      { word: 'hmoob', meaning: 'Hmong', tone: 'h' },
+      { word: 'hmab', meaning: 'stump', tone: 'm' },
+      { word: 'hmad', meaning: 'burn', tone: 'm' },
+      { word: 'hu', meaning: 'call', tone: 'h' },
+      { word: 'lus', meaning: 'word', tone: 'b' },
+      { word: 'lus', meaning: 'language', tone: 'b' },
+      { word: 'tsob', meaning: 'classifier for plants', tone: 'b' },
+      { word: 'tsis', meaning: 'not', tone: 'x' },
+      { word: 'twg', meaning: 'who', tone: 'x' },
+      { word: 'nyuaj', meaning: 'difficult', tone: 'j' },
+      { word: 'dav', meaning: 'east', tone: 'b' },
+      { word: 'dab', meaning: 'spirit', tone: 'b' },
+      { word: 'taub', meaning: 'open', tone: 'b' },
+      { word: 'noog', meaning: 'listen', tone: 'b' },
+      { word: 'huas', meaning: 'big', tone: 's' },
+      { word: 'hais', meaning: 'speak', tone: 's' },
+      { word: 'pom', meaning: 'see', tone: 'm' },
+      { word: 'ntshai', meaning: 'afraid', tone: 'x' },
+      { word: 'siab', meaning: 'heart', tone: 'b' },
+      { word: 'siav', meaning: 'yellow', tone: 'x' },
+      { word: 'huab', meaning: 'cloud', tone: 'h' },
+      { word: 'huab', meaning: 'cloth', tone: 'h' },
+      { word: 'taug', meaning: 'to walk', tone: 'b' },
+      { word: 'tug', meaning: 'classifier for animals', tone: 'x' }
+    ];
+
+    let score = 0, streak = 0, current = null, total = 0, answered = 0;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function loadQuestion() {
+      const pool = shuffle(words);
+      current = pool[Math.floor(Math.random() * pool.length)];
+      document.getElementById('hmongWord').textContent = current.word;
+      document.getElementById('englishHint').textContent = `"${current.meaning}"`;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('nextBtn').style.display = 'none';
+      document.getElementById('progress').textContent = `${answered + 1} / ${pool.length}`;
+
+      const container = document.getElementById('toneOptions');
+      container.innerHTML = '';
+      const shuffledTones = shuffle(tones);
+      shuffledTones.forEach(t => {
+        const btn = document.createElement('button');
+        btn.className = 'tone-btn';
+        btn.innerHTML = `<span class="tone-label">${t.label}</span><span class="tone-desc">${t.desc}</span>`;
+        btn.onclick = () => checkTone(t.id, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function checkTone(selected, btn) {
+      const allBtns = document.querySelectorAll('.tone-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selected === current.tone) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').innerHTML = '<span style="color:#22c55e">✅ Correct!</span>';
+        score += 10 + streak * 2;
+        streak++;
+      } else {
+        btn.classList.add('wrong');
+        document.getElementById('feedback').innerHTML = `<span style="color:#ef4444">❌ The answer was: ${tones.find(t=>t.id===current.tone).label}</span>`;
+        streak = 0;
+        // Highlight correct
+        allBtns.forEach(b => {
+          if (b.textContent.includes(tones.find(t=>t.id===current.tone).label)) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      document.getElementById('score').textContent = score;
+      document.getElementById('streak').textContent = streak;
+      answered++;
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
