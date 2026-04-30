@@ -1,0 +1,16 @@
+{
+  "name": "HmongHeritage",
+  "short_name": "HmongHeritage",
+  "description": "Learn, Preserve, Celebrate Hmong language and culture",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#c0392b",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
