@@ -731,3 +731,121 @@ img {
   z-index: 999;
   transition: width 0.1s linear;
 }
+
+/* --- Culture Images --- */
+.culture-image {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: var(--color-dark);
+  padding: 8px;
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* --- Language Toggle --- */
+.lang-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: var(--color-primary);
+  color: #fff;
+  border: 2px solid var(--color-secondary);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  font-family: 'Noto Sans Hmong Nyiakeng', 'Merriweather', sans-serif;
+}
+
+.lang-toggle:hover {
+  background: var(--color-secondary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.lang-toggle .hmong-hidden {
+  display: none;
+}
+
+.lang-toggle .en-hidden {
+  display: inline;
+}
+
+/* When HMN mode is active */
+body.hmn-mode .lang-toggle {
+  background: var(--color-accent);
+}
+
+/* Translated text visibility */
+[data-lang="en"], [data-lang="hm"] {
+  transition: opacity 0.3s ease;
+}
+
+[data-lang="hm"] {
+  display: none;
+}
+
+body.hmn-mode [data-lang="en"] {
+  display: none;
+}
+
+body.hmn-mode [data-lang="hm"] {
+  display: inline;
+}
+
+/* Block-level language toggles (for paragraphs, headings, etc.) */
+[data-lang-block="hm"] {
+  display: none;
+}
+
+body.hmn-mode [data-lang-block="en"] {
+  display: none;
+}
+
+body.hmn-mode [data-lang-block="hm"] {
+  display: block;
+}
+
+table [data-lang-block="hm"] {
+  display: none;
+}
+
+body.hmn-mode table [data-lang-block="hm"] {
+  display: table-cell;
+}
+
+table [data-lang-block="en"] {
+  display: table-cell;
+}
+
+body.hmn-mode table [data-lang-block="en"] {
+  display: none;
+}
+
+ul [data-lang-block="hm"] {
+  display: none;
+}
+
+body.hmn-mode ul [data-lang-block="hm"] {
+  display: list-item;
+}
+
+ul [data-lang-block="en"] {
+  display: list-item;
+}
+
+body.hmn-mode ul [data-lang-block="en"] {
+  display: none;
+}

@@ -88,3 +88,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('🐾 HmongHeritage loaded — Kev Cai Hmoob!');
 });
+
+  // --- Language Toggle (EN ↔ HMN) ---
+  const langToggle = document.getElementById('langToggle');
+  const hmnElements = document.querySelectorAll('[data-lang="hm"], [data-lang-block="hm"]');
+  const enElements = document.querySelectorAll('[data-lang="en"], [data-lang-block="en"]');
+
+  let isHmnMode = false;
+
+  // Check localStorage for saved preference
+  if (localStorage.getItem('hm-lang') === 'hm') {
+    document.body.classList.add('hmn-mode');
+    isHmnMode = true;
+    if (langToggle) langToggle.textContent = '🇭🇲 Hmoob';
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener('click', () => {
+      isHmnMode = !isHmnMode;
+      document.body.classList.toggle('hmn-mode', isHmnMode);
+      langToggle.textContent = isHmnMode ? '🇭🇲 Hmoob' : '🇺🇸 English';
+      localStorage.setItem('hm-lang', isHmnMode ? 'hm' : 'en');
+    });
+  }

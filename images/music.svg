@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a1a2e" rx="12"/>
+  <!-- Qeej bamboo pipes -->
+  <line x1="55" y1="40" x2="55" y2="160" stroke="#e67e22" stroke-width="8" stroke-linecap="round"/>
+  <line x1="75" y1="35" x2="75" y2="160" stroke="#e67e22" stroke-width="8" stroke-linecap="round"/>
+  <line x1="95" y1="30" x2="95" y2="160" stroke="#e67e22" stroke-width="8" stroke-linecap="round"/>
+  <line x1="115" y1="35" x2="115" y2="160" stroke="#e67e22" stroke-width="8" stroke-linecap="round"/>
+  <line x1="135" y1="40" x2="135" y2="160" stroke="#e67e22" stroke-width="8" stroke-linecap="round"/>
+  <!-- Pipe joints -->
+  <line x1="48" y1="80" x2="152" y2="80" stroke="#d35400" stroke-width="3"/>
+  <line x1="48" y1="120" x2="152" y2="120" stroke="#d35400" stroke-width="3"/>
+  <!-- Sound waves -->
+  <path d="M30,100 Q10,80 30,60" fill="none" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+  <path d="M25,100 Q5,70 25,40" fill="none" stroke="#3498db" stroke-width="1.5" opacity="0.3"/>
+  <path d="M170,100 Q190,80 170,60" fill="none" stroke="#3498db" stroke-width="2" opacity="0.5"/>
+  <path d="M175,100 Q195,70 175,40" fill="none" stroke="#3498db" stroke-width="1.5" opacity="0.3"/>
+  <!-- Musical notes floating -->
+  <text x="20" y="170" font-size="20" fill="#c0392b">♪</text>
+  <text x="160" y="165" font-size="16" fill="#f39c12">♫</text>
+  <text x="165" y="130" font-size="14" fill="#c0392b">♪</text>
+</svg>

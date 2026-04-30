@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a1a2e" rx="12"/>
+  <!-- Festival lanterns -->
+  <ellipse cx="60" cy="55" rx="15" ry="20" fill="#e74c3c" opacity="0.8"/>
+  <line x1="60" y1="35" x2="60" y2="25" stroke="#f39c12" stroke-width="2"/>
+  <ellipse cx="100" cy="45" rx="18" ry="24" fill="#f39c12" opacity="0.8"/>
+  <line x1="100" y1="21" x2="100" y2="10" stroke="#f39c12" stroke-width="2"/>
+  <ellipse cx="140" cy="55" rx="15" ry="20" fill="#e74c3c" opacity="0.8"/>
+  <line x1="140" y1="35" x2="140" y2="25" stroke="#f39c12" stroke-width="2"/>
+  <!-- Moon -->
+  <circle cx="100" cy="95" r="25" fill="#f1c40f" opacity="0.2"/>
+  <circle cx="100" cy="95" r="20" fill="none" stroke="#f1c40f" stroke-width="1.5" opacity="0.4"/>
+  <!-- Musical notes -->
+  <text x="50" y="140" font-size="24" fill="#c0392b">♪</text>
+  <text x="120" y="155" font-size="28" fill="#f39c12">♫</text>
+  <text x="155" y="135" font-size="22" fill="#c0392b">♪</text>
+  <!-- Ground line -->
+  <line x1="20" y1="175" x2="180" y2="175" stroke="#3498db" stroke-width="2" opacity="0.3"/>
+  <!-- Decorative dots -->
+  <circle cx="40" cy="175" r="3" fill="#c0392b"/>
+  <circle cx="80" cy="175" r="3" fill="#f39c12"/>
+  <circle cx="120" cy="175" r="3" fill="#c0392b"/>
+  <circle cx="160" cy="175" r="3" fill="#f39c12"/>
+</svg>

@@ -30,6 +30,7 @@
         <li><a href="culture/index.html">🎭 Culture</a></li>
         <li><a href="about/index.html">👥 About</a></li>
       </ul>
+      <button class="lang-toggle" id="langToggle">🇺🇸 English</button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
@@ -109,33 +110,63 @@
           <div class="card-icon">👋</div>
           <h3>Greetings</h3>
           <table class="lesson-table" style="margin-top: 12px;">
-            <tr><td><span class="hmong-word">Nyob zoo</span></td><td class="pronunciation">[nyob zow]</td><td>Hello / Greetings</td></tr>
-            <tr><td><span class="hmong-word">Nyob qab</span></td><td class="pronunciation">[nyob kub]</td><td>Goodbye</td></tr>
-            <tr><td><span class="hmong-word">Ua tsaug</span></td><td class="pronunciation">[ow tsowg]</td><td>Thank you</td></tr>
-            <tr><td><span class="hmong-word">Yog</span></td><td class="pronunciation">[yong]</td><td>Yes</td></tr>
-            <tr><td><span class="hmong-word">Tsis yog</span></td><td class="pronunciation">[tis yong]</td><td>No</td></tr>
+            <thead>
+              <tr><th data-lang-block="en">Hmong</th><th data-lang-block="hm">Hmoob</th><th data-lang-block="en">English</th><th data-lang-block="hm">Xaiv</th></tr>
+            </thead>
+            <tbody>
+            <tr data-lang-block="en"><td><span class="hmong-word">Nyob zoo</span></td><td class="pronunciation">[nyob zow]</td><td>Hello / Greetings</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Nyob zoo</span></td><td class="pronunciation">[nyob zow]</td><td>Nyob zoo / Nyob zoo</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Nyob qab</span></td><td class="pronunciation">[nyob kub]</td><td>Goodbye</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Nyob qab</span></td><td class="pronunciation">[nyob kub]</td><td>Nyob qab / Nyob qab</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Ua tsaug</span></td><td class="pronunciation">[ow tsowg]</td><td>Thank you</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Ua tsaug</span></td><td class="pronunciation">[ow tsowg]</td><td>Ua tsaug / Ua tsaug</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Yog</span></td><td class="pronunciation">[yong]</td><td>Yes</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Yog</span></td><td class="pronunciation">[yong]</td><td>Yog / Yog</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Tsis yog</span></td><td class="pronunciation">[tis yong]</td><td>No</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Tsis yog</span></td><td class="pronunciation">[tis yong]</td><td>Tsis yog / Tsis yog</td></tr>
+            </tbody>
           </table>
         </div>
         <div class="card" style="border-top-color: var(--color-secondary);">
           <div class="card-icon">👨‍👩‍👧‍👦</div>
           <h3>Family</h3>
           <table class="lesson-table" style="margin-top: 12px;">
-            <tr><td><span class="hmong-word">Vaj</span></td><td class="pronunciation">[vahj]</td><td>Grandfather</td></tr>
-            <tr><td><span class="hmong-word">Nkauj</span></td><td class="pronunciation">[nkowj]</td><td>Grandmother</td></tr>
-            <tr><td><span class="hmong-word">Tus neeg</span></td><td class="pronunciation">[tus neeg]</td><td>People</td></tr>
-            <tr><td><span class="hmong-word">Tub</span></td><td class="pronunciation">[tub]</td><td>Son</td></tr>
-            <tr><td><span class="hmong-word">Yam</span></td><td class="pronunciation">[yam]</td><td>Daughter</td></tr>
+            <thead>
+              <tr><th data-lang-block="en">Hmong</th><th data-lang-block="hm">Hmoob</th><th data-lang-block="en">English</th><th data-lang-block="hm">Xaiv</th></tr>
+            </thead>
+            <tbody>
+            <tr data-lang-block="en"><td><span class="hmong-word">Vaj</span></td><td class="pronunciation">[vahj]</td><td>Grandfather</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Vaj</span></td><td class="pronunciation">[vahj]</td><td>Vaj / Vaj</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Nkauj</span></td><td class="pronunciation">[nkowj]</td><td>Grandmother</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Nkauj</span></td><td class="pronunciation">[nkowj]</td><td>Nkauj / Nkauj</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Tus neeg</span></td><td class="pronunciation">[tus neeg]</td><td>People</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Tus neeg</span></td><td class="pronunciation">[tus neeg]</td><td>Tus neeg / Tus neeg</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Tub</span></td><td class="pronunciation">[tub]</td><td>Son</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Tub</span></td><td class="pronunciation">[tub]</td><td>Tub / Tub</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Yam</span></td><td class="pronunciation">[yam]</td><td>Daughter</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Yam</span></td><td class="pronunciation">[yam]</td><td>Yam / Yam</td></tr>
+            </tbody>
           </table>
         </div>
         <div class="card" style="border-top-color: var(--color-primary);">
           <div class="card-icon">🍚</div>
           <h3>Everyday Words</h3>
           <table class="lesson-table" style="margin-top: 12px;">
-            <tr><td><span class="hmong-word">Zaj</span></td><td class="pronunciation">[zahj]</td><td>Food</td></tr>
-            <tr><td><span class="hmong-word">Tsev</span></td><td class="pronunciation">[tseh]</td><td>House</td></tr>
-            <tr><td><span class="hmong-word">Tsuas</span></td><td class="pronunciation">[tsoos]</td><td>Water</td></tr>
-            <tr><td><span class="hmong-word">Hnub</span></td><td class="pronunciation">[hnoob]</td><td>Sun / Day</td></tr>
-            <tr><td><span class="hmong-word">Hnub no</span></td><td class="pronunciation">[hnoob now]</td><td>Today</td></tr>
+            <thead>
+              <tr><th data-lang-block="en">Hmong</th><th data-lang-block="hm">Hmoob</th><th data-lang-block="en">English</th><th data-lang-block="hm">Xaiv</th></tr>
+            </thead>
+            <tbody>
+            <tr data-lang-block="en"><td><span class="hmong-word">Zaj</span></td><td class="pronunciation">[zahj]</td><td>Food</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Zaj</span></td><td class="pronunciation">[zahj]</td><td>Zaj / Zaj</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Tsev</span></td><td class="pronunciation">[tseh]</td><td>House</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Tsev</span></td><td class="pronunciation">[tseh]</td><td>Tsev / Tsev</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Tsuas</span></td><td class="pronunciation">[tsoos]</td><td>Water</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Tsuas</span></td><td class="pronunciation">[tsoos]</td><td>Tsuas / Tsuas</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Hnub</span></td><td class="pronunciation">[hnoob]</td><td>Sun / Day</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Hnub</span></td><td class="pronunciation">[hnoob]</td><td>Hnub / Hnub</td></tr>
+            <tr data-lang-block="en"><td><span class="hmong-word">Hnub no</span></td><td class="pronunciation">[hnoob now]</td><td>Today</td></tr>
+            <tr data-lang-block="hm"><td><span class="hmong-word">Hnub no</span></td><td class="pronunciation">[hnoob now]</td><td>Hnub no / Hnub no</td></tr>
+            </tbody>
           </table>
         </div>
       </div>

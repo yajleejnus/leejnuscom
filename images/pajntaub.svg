@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a1a2e" rx="12"/>
+  <!-- Hmong-inspired geometric embroidery pattern -->
+  <rect x="40" y="40" width="120" height="120" fill="none" stroke="#c0392b" stroke-width="2" rx="4"/>
+  <rect x="55" y="55" width="90" height="90" fill="none" stroke="#f1c40f" stroke-width="2" rx="4"/>
+  <!-- Center diamond -->
+  <polygon points="100,60 140,100 100,140 60,100" fill="#c0392b" opacity="0.3"/>
+  <polygon points="100,70 130,100 100,130 70,100" fill="none" stroke="#f1c40f" stroke-width="2"/>
+  <!-- Corner motifs -->
+  <circle cx="70" cy="70" r="8" fill="#c0392b" opacity="0.5"/>
+  <circle cx="130" cy="70" r="8" fill="#c0392b" opacity="0.5"/>
+  <circle cx="70" cy="130" r="8" fill="#c0392b" opacity="0.5"/>
+  <circle cx="130" cy="130" r="8" fill="#c0392b" opacity="0.5"/>
+  <!-- Zigzag borders -->
+  <polyline points="50,50 55,45 60,50 65,45 70,50 75,45 80,50" fill="none" stroke="#3498db" stroke-width="1.5"/>
+  <polyline points="120,50 125,45 130,50 135,45 140,50 145,45 150,50" fill="none" stroke="#3498db" stroke-width="1.5"/>
+  <polyline points="50,150 55,155 60,150 65,155 70,150 75,155 80,150" fill="none" stroke="#3498db" stroke-width="1.5"/>
+  <polyline points="120,150 125,155 130,150 135,155 140,150 145,155 150,150" fill="none" stroke="#3498db" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a1a2e" rx="12"/>
+  <!-- Spirit circle -->
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#8e44ad" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="100" cy="100" r="45" fill="none" stroke="#8e44ad" stroke-width="1" opacity="0.3"/>
+  <!-- Central figure -->
+  <circle cx="100" cy="80" r="15" fill="#8e44ad" opacity="0.3"/>
+  <path d="M85,100 L85,140" stroke="#8e44ad" stroke-width="3" opacity="0.4"/>
+  <path d="M115,100 L115,140" stroke="#8e44ad" stroke-width="3" opacity="0.4"/>
+  <path d="M85,120 L115,120" stroke="#8e44ad" stroke-width="2" opacity="0.4"/>
+  <!-- Spirit dots orbiting -->
+  <circle cx="100" cy="40" r="4" fill="#f1c40f" opacity="0.7"/>
+  <circle cx="150" cy="80" r="3" fill="#f1c40f" opacity="0.5"/>
+  <circle cx="150" cy="120" r="3" fill="#f1c40f" opacity="0.5"/>
+  <circle cx="100" cy="160" r="4" fill="#f1c40f" opacity="0.7"/>
+  <circle cx="50" cy="120" r="3" fill="#f1c40f" opacity="0.5"/>
+  <circle cx="50" cy="80" r="3" fill="#f1c40f" opacity="0.5"/>
+  <!-- Spiral pattern -->
+  <path d="M100,100 Q115,85 100,70 Q80,60 90,45 Q105,25 130,35 Q155,45 145,70" fill="none" stroke="#f1c40f" stroke-width="1" opacity="0.3"/>
+  <!-- Ancestor symbols -->
+  <text x="30" y="30" font-size="18" fill="#8e44ad" opacity="0.4">👁</text>
+  <text x="150" y="30" font-size="18" fill="#8e44ad" opacity="0.4">👁</text>
+  <text x="80" y="175" font-size="16" fill="#8e44ad" opacity="0.4">🙏</text>
+</svg>
