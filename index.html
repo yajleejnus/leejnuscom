@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🇭🇲 Hmong Heritage — Learn, Preserve, Celebrate</title>
   <meta name="description" content="A Hmong educational website dedicated to preserving Hmong language, culture, and history for future generations.">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tutor_widget.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hmong+Nyiakeng:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🇭🇲%3C/text%3E%3C/svg%3E">
   <meta property="og:title" content="HmongHeritage — Learn, Preserve, Celebrate">
   <meta property="og:description" content="A Hmong educational website dedicated to preserving Hmong language, culture, and history for future generations.">
@@ -31,6 +32,7 @@
         <li><a href="about/index.html">👥 About</a></li>
       </ul>
       <button class="lang-toggle" id="langToggle">🇺🇸 English</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
@@ -48,7 +50,18 @@
         <a href="culture/index.html" class="btn btn-outline">🎭 Explore Culture</a>
         <a href="games/index.html" class="btn btn-outline">🎮 Play Games</a>
       </div>
+
+      <div id="wordOfDay" class="word-of-day-card">
+        <div class="wotd-label">✨ Word of the Day</div>
+        <div class="wotd-content">
+          <span id="wotd-hm" class="wotd-hm">...</span>
+          <span id="wotd-pron" class="wotd-pron">[...]</span>
+          <div id="wotd-en" class="wotd-en">Loading...</div>
+        </div>
+      </div>
     </div>
+  </section>
+
   </section>
 
   <!-- Hmong Pattern Divider -->
@@ -208,9 +221,31 @@
     </div>
   </footer>
 
+  <!-- Tutor Widget -->
+  <div class="tutor-container">
+    <div class="tutor-bubble">🤖</div>
+    <div class="tutor-window">
+      <div class="tutor-header">
+        <div class="avatar">🧠</div>
+        <div class="tutor-header-info">
+          <h4>Leejnus AI Tutor</h4>
+          <p>Online | Ready to Help</p>
+        </div>
+      </div>
+      <div class="tutor-messages"></div>
+      <div class="tutor-input-area">
+        <input type="text" class="tutor-input" placeholder="Ask me something...">
+        <button class="tutor-send">➔</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Bottom Border -->
   <div class="hmong-border"></div>
 
-  <script src="js/main.js"></script>
-</body>
+    <script src="js/main.js"></script>
+    <script src="js/juice.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/tutor_widget.js"></script>
+  </body>
 </html>
