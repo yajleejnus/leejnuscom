@@ -1,0 +1,50 @@
+[
+  {
+    "hm": "Nyob zoo",
+    "en": "Hello / Greetings",
+    "pron": "nyob zow",
+    "category": "Greetings"
+  },
+  {
+    "hm": "Ua tsaug",
+    "en": "Thank you",
+    "pron": "ow tsowg",
+    "category": "Greetings"
+  },
+  {
+    "hm": "Koom tsev",
+    "en": "Homecoming",
+    "pron": "koom tseh",
+    "category": "Culture"
+  },
+  {
+    "hm": "Paj Ntaub",
+    "en": "Story Cloth",
+    "pron": "pahj ntow",
+    "category": "Art"
+  },
+  {
+    "hm": "Lub ntuj",
+    "en": "The Sky / Heaven",
+    "pron": "loo ntoo",
+    "category": "Nature"
+  },
+  {
+    "hm": "Tsev neeg",
+    "en": "Family",
+    "pron": "tseh neeg",
+    "category": "Family"
+  },
+  {
+    "hm": "Hmoob",
+    "en": "Hmong",
+    "pron": "hmuong",
+    "category": "Identity"
+  },
+  {
+    "hm": "Kev kawm",
+    "en": "Learning / Education",
+    "pron": "keh kow",
+    "category": "Education"
+  }
+]
